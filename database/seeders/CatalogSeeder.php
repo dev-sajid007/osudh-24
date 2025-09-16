@@ -18,63 +18,145 @@ class CatalogSeeder extends Seeder
         // Create Categories
         $categories = [
             [
-                'name' => 'Pain Relief',
-                'slug' => 'pain-relief',
-                'description' => 'Pain relievers and anti-inflammatory medications',
+                'name' => 'Healthcare',
+                'slug' => 'healthcare',
+                'description' => 'General healthcare products and medications',
                 'is_active' => true,
                 'sort_order' => 1,
                 'children' => [
-                    ['name' => 'Headache Relief', 'slug' => 'headache-relief'],
-                    ['name' => 'Joint Pain', 'slug' => 'joint-pain'],
-                    ['name' => 'Muscle Pain', 'slug' => 'muscle-pain'],
+                    ['name' => 'Pain Relief', 'slug' => 'pain-relief'],
+                    ['name' => 'Cold & Flu', 'slug' => 'cold-flu'],
+                    ['name' => 'Digestive Health', 'slug' => 'digestive-health'],
+                    ['name' => 'First Aid', 'slug' => 'first-aid'],
                 ]
             ],
             [
-                'name' => 'Cold & Flu',
-                'slug' => 'cold-flu',
-                'description' => 'Cold, flu, and respiratory medications',
+                'name' => 'Beauty',
+                'slug' => 'beauty',
+                'description' => 'Beauty and cosmetic products',
                 'is_active' => true,
                 'sort_order' => 2,
                 'children' => [
-                    ['name' => 'Cough Syrups', 'slug' => 'cough-syrups'],
-                    ['name' => 'Nasal Decongestants', 'slug' => 'nasal-decongestants'],
-                    ['name' => 'Throat Lozenges', 'slug' => 'throat-lozenges'],
+                    ['name' => 'Skincare', 'slug' => 'skincare'],
+                    ['name' => 'Hair Care', 'slug' => 'hair-care'],
+                    ['name' => 'Makeup', 'slug' => 'makeup'],
+                    ['name' => 'Fragrances', 'slug' => 'fragrances'],
                 ]
             ],
             [
-                'name' => 'Digestive Health',
-                'slug' => 'digestive-health',
-                'description' => 'Digestive and gastrointestinal medications',
+                'name' => 'Sexual Wellness',
+                'slug' => 'sexual-wellness',
+                'description' => 'Sexual health and wellness products',
                 'is_active' => true,
                 'sort_order' => 3,
                 'children' => [
-                    ['name' => 'Antacids', 'slug' => 'antacids'],
-                    ['name' => 'Laxatives', 'slug' => 'laxatives'],
-                    ['name' => 'Anti-Diarrheal', 'slug' => 'anti-diarrheal'],
+                    ['name' => 'Contraceptives', 'slug' => 'contraceptives'],
+                    ['name' => 'Lubricants', 'slug' => 'lubricants'],
+                    ['name' => 'Enhancement Products', 'slug' => 'enhancement-products'],
                 ]
             ],
             [
-                'name' => 'Vitamins & Supplements',
-                'slug' => 'vitamins-supplements',
-                'description' => 'Vitamins, minerals, and dietary supplements',
+                'name' => 'Baby & Mom Care',
+                'slug' => 'baby-mom-care',
+                'description' => 'Products for babies and mothers',
                 'is_active' => true,
                 'sort_order' => 4,
                 'children' => [
-                    ['name' => 'Multivitamins', 'slug' => 'multivitamins'],
-                    ['name' => 'Vitamin D', 'slug' => 'vitamin-d'],
-                    ['name' => 'Calcium', 'slug' => 'calcium'],
+                    ['name' => 'Baby Food', 'slug' => 'baby-food'],
+                    ['name' => 'Diapers', 'slug' => 'diapers'],
+                    ['name' => 'Baby Skincare', 'slug' => 'baby-skincare'],
+                    ['name' => 'Maternity Care', 'slug' => 'maternity-care'],
                 ]
             ],
             [
-                'name' => 'Prescription Medicines',
-                'slug' => 'prescription-medicines',
-                'description' => 'Prescription-only medications',
+                'name' => 'Herbal',
+                'slug' => 'herbal',
+                'description' => 'Natural and herbal products',
                 'is_active' => true,
                 'sort_order' => 5,
                 'children' => [
-                    ['name' => 'Antibiotics', 'slug' => 'antibiotics'],
-                    ['name' => 'Blood Pressure', 'slug' => 'blood-pressure'],
-                    ['name' => 'Diabetes', 'slug' => 'diabetes'],
+                    ['name' => 'Herbal Supplements', 'slug' => 'herbal-supplements'],
+                    ['name' => 'Ayurvedic Medicines', 'slug' => 'ayurvedic-medicines'],
+                    ['name' => 'Herbal Teas', 'slug' => 'herbal-teas'],
+                    ['name' => 'Essential Oils', 'slug' => 'essential-oils'],
+                ]
+            ],
+            [
+                'name' => 'Home Care',
+                'slug' => 'home-care',
+                'description' => 'Home cleaning and care products',
+                'is_active' => true,
+                'sort_order' => 6,
+                'children' => [
+                    ['name' => 'Disinfectants', 'slug' => 'disinfectants'],
+                    ['name' => 'Hand Sanitizers', 'slug' => 'hand-sanitizers'],
+                    ['name' => 'Surface Cleaners', 'slug' => 'surface-cleaners'],
+                    ['name' => 'Air Fresheners', 'slug' => 'air-fresheners'],
+                ]
+            ],
+            [
+                'name' => 'Supplement',
+                'slug' => 'supplement',
+                'description' => 'Nutritional supplements and vitamins',
+                'is_active' => true,
+                'sort_order' => 7,
+                'children' => [
+                    ['name' => 'Multivitamins', 'slug' => 'multivitamins'],
+                    ['name' => 'Protein Supplements', 'slug' => 'protein-supplements'],
+                    ['name' => 'Omega-3', 'slug' => 'omega-3'],
+                    ['name' => 'Probiotics', 'slug' => 'probiotics'],
+                ]
+            ],
+            [
+                'name' => 'Food and Nutrition',
+                'slug' => 'food-nutrition',
+                'description' => 'Nutritional foods and dietary products',
+                'is_active' => true,
+                'sort_order' => 8,
+                'children' => [
+                    ['name' => 'Health Drinks', 'slug' => 'health-drinks'],
+                    ['name' => 'Diabetic Foods', 'slug' => 'diabetic-foods'],
+                    ['name' => 'Protein Bars', 'slug' => 'protein-bars'],
+                    ['name' => 'Organic Foods', 'slug' => 'organic-foods'],
+                ]
+            ],
+            [
+                'name' => 'Pet Care',
+                'slug' => 'pet-care',
+                'description' => 'Pet health and care products',
+                'is_active' => true,
+                'sort_order' => 9,
+                'children' => [
+                    ['name' => 'Pet Food', 'slug' => 'pet-food'],
+                    ['name' => 'Pet Grooming', 'slug' => 'pet-grooming'],
+                    ['name' => 'Pet Accessories', 'slug' => 'pet-accessories'],
+                    ['name' => 'Pet Toys', 'slug' => 'pet-toys'],
+                ]
+            ],
+            [
+                'name' => 'Veterinary',
+                'slug' => 'veterinary',
+                'description' => 'Veterinary medicines and treatments',
+                'is_active' => true,
+                'sort_order' => 10,
+                'children' => [
+                    ['name' => 'Pet Medications', 'slug' => 'pet-medications'],
+                    ['name' => 'Vaccines', 'slug' => 'vaccines'],
+                    ['name' => 'Dewormers', 'slug' => 'dewormers'],
+                    ['name' => 'Flea & Tick Control', 'slug' => 'flea-tick-control'],
+                ]
+            ],
+            [
+                'name' => 'Homeopathy',
+                'slug' => 'homeopathy',
+                'description' => 'Homeopathic medicines and remedies',
+                'is_active' => true,
+                'sort_order' => 11,
+                'children' => [
+                    ['name' => 'Acute Remedies', 'slug' => 'acute-remedies'],
+                    ['name' => 'Constitutional Remedies', 'slug' => 'constitutional-remedies'],
+                    ['name' => 'Tissue Salts', 'slug' => 'tissue-salts'],
+                    ['name' => 'Mother Tinctures', 'slug' => 'mother-tinctures'],
                 ]
             ]
         ];
@@ -242,14 +324,16 @@ class CatalogSeeder extends Seeder
         }
 
         // Create Products
+        $healthcareCategory = Category::where('slug', 'healthcare')->first();
         $painReliefCategory = Category::where('slug', 'pain-relief')->first();
-        $headacheCategory = Category::where('slug', 'headache-relief')->first();
         $coldFluCategory = Category::where('slug', 'cold-flu')->first();
-        $coughSyrupCategory = Category::where('slug', 'cough-syrups')->first();
         $digestiveCategory = Category::where('slug', 'digestive-health')->first();
-        $vitaminCategory = Category::where('slug', 'vitamins-supplements')->first();
-        $prescriptionCategory = Category::where('slug', 'prescription-medicines')->first();
-        $antibioticsCategory = Category::where('slug', 'antibiotics')->first();
+        $beautyCategory = Category::where('slug', 'beauty')->first();
+        $skincareCategory = Category::where('slug', 'skincare')->first();
+        $supplementCategory = Category::where('slug', 'supplement')->first();
+        $multivitaminCategory = Category::where('slug', 'multivitamins')->first();
+        $herbalCategory = Category::where('slug', 'herbal')->first();
+        $homeopathyCategory = Category::where('slug', 'homeopathy')->first();
 
         $supplier1 = Supplier::where('code', 'PC001')->first();
         $supplier2 = Supplier::where('code', 'MS002')->first();
@@ -285,7 +369,7 @@ class CatalogSeeder extends Seeder
                 'strength' => '500mg',
                 'package_size' => '10 tablets',
                 'prescription_required' => false,
-                'category_id' => $headacheCategory->id,
+                'category_id' => $painReliefCategory->id,
                 'description' => 'Effective pain relief and fever reducer. Safe for adults and children over 12 years.',
                 'unit_price' => 25.00,
                 'mrp' => 30.00,
@@ -343,7 +427,7 @@ class CatalogSeeder extends Seeder
                 'strength' => '15mg/5ml + 5mg/5ml',
                 'package_size' => '100ml bottle',
                 'prescription_required' => false,
-                'category_id' => $coughSyrupCategory->id,
+                'category_id' => $coldFluCategory->id,
                 'description' => 'Relief from dry cough and nasal congestion.',
                 'unit_price' => 85.00,
                 'mrp' => 95.00,
@@ -373,7 +457,7 @@ class CatalogSeeder extends Seeder
                 'strength' => 'Various vitamins & minerals',
                 'package_size' => '30 tablets',
                 'prescription_required' => false,
-                'category_id' => $vitaminCategory->id,
+                'category_id' => $multivitaminCategory->id,
                 'description' => 'Complete multivitamin and mineral supplement for daily health.',
                 'unit_price' => 180.00,
                 'mrp' => 200.00,
@@ -403,7 +487,7 @@ class CatalogSeeder extends Seeder
                 'strength' => '500mg',
                 'package_size' => '10 capsules',
                 'prescription_required' => true,
-                'category_id' => $antibioticsCategory->id,
+                'category_id' => $healthcareCategory->id,
                 'description' => 'Broad-spectrum antibiotic for bacterial infections.',
                 'unit_price' => 120.00,
                 'mrp' => 135.00,

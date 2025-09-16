@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
@@ -9,12 +10,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-    }
-    return redirect()->route('login');
-})->name('home');
+
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Authentication Routes (guest only)
 Route::middleware('guest')->group(function () {
@@ -27,6 +26,13 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Frontend Routes (public)
+Route::prefix('categories')->name('categories.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Frontend\CategoryController::class, 'index'])->name('index');
+    Route::get('/{category:slug}', [App\Http\Controllers\Frontend\CategoryController::class, 'show'])->name('show');
+});
+
+Route::get('api/categories', [App\Http\Controllers\Frontend\CategoryController::class, 'api'])->name('api.categories');
+
 Route::prefix('generics')->name('generics.')->group(function () {
     Route::get('/', [App\Http\Controllers\Frontend\GenericController::class, 'index'])->name('index');
     Route::get('/compare', [App\Http\Controllers\Frontend\GenericController::class, 'compare'])->name('compare');
@@ -78,6 +84,10 @@ Route::middleware('auth')->group(function () {
             Route::get('stock/export/expired', [App\Http\Controllers\Admin\StockReportController::class, 'exportExpired'])->name('stock.export.expired');
             Route::get('stock/export/valuation', [App\Http\Controllers\Admin\StockReportController::class, 'exportValuation'])->name('stock.export.valuation');
         });
+
+        // Website Settings
+        Route::resource('website-settings', App\Http\Controllers\Admin\WebsiteSettingController::class);
+        Route::post('website-settings/bulk-update', [App\Http\Controllers\Admin\WebsiteSettingController::class, 'bulkUpdate'])->name('website-settings.bulk-update');
 
         // Cloudinary Setup
         Route::get('cloudinary-setup', function () {
