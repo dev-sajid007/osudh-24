@@ -137,8 +137,10 @@
                             <i data-lucide="pill" class="w-16 h-16 text-gray-400"></i>
                         </div>
                         <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">-20%</span>
-                        <button class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50">
-                            <i data-lucide="heart" class="w-4 h-4 text-gray-400"></i>
+                        <button onclick="toggleWishlist(1)"
+                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
+                            data-product-id="1" data-in-wishlist="false" title="Add to Wishlist">
+                            <i class="fas fa-heart text-gray-400"></i>
                         </button>
                     </div>
                     <div class="p-4">
@@ -159,11 +161,14 @@
                                 <span class="text-lg font-bold text-cyan-600">$8.99</span>
                                 <span class="text-sm text-gray-500 line-through ml-2">$11.24</span>
                             </div>
-                            <button
-                                class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center">
-                                <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                Add
-                            </button>
+                            <div class="add-to-cart-form">
+                                <button
+                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
+                                    data-product-id="1">
+                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -174,8 +179,10 @@
                         <div class="bg-gray-200 h-48 flex items-center justify-center">
                             <i data-lucide="thermometer" class="w-16 h-16 text-gray-400"></i>
                         </div>
-                        <button class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50">
-                            <i data-lucide="heart" class="w-4 h-4 text-gray-400"></i>
+                        <button onclick="toggleWishlist(2)"
+                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
+                            data-product-id="2" data-in-wishlist="false" title="Add to Wishlist">
+                            <i class="fas fa-heart text-gray-400"></i>
                         </button>
                     </div>
                     <div class="p-4">
@@ -195,11 +202,14 @@
                             <div>
                                 <span class="text-lg font-bold text-cyan-600">$24.99</span>
                             </div>
-                            <button
-                                class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center">
-                                <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                Add
-                            </button>
+                            <div class="add-to-cart-form">
+                                <button
+                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
+                                    data-product-id="2">
+                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -211,8 +221,10 @@
                             <i data-lucide="droplets" class="w-16 h-16 text-gray-400"></i>
                         </div>
                         <span class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">New</span>
-                        <button class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50">
-                            <i data-lucide="heart" class="w-4 h-4 text-gray-400"></i>
+                        <button onclick="toggleWishlist(3)"
+                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
+                            data-product-id="3" data-in-wishlist="false" title="Add to Wishlist">
+                            <i class="fas fa-heart text-gray-400"></i>
                         </button>
                     </div>
                     <div class="p-4">
@@ -232,11 +244,14 @@
                             <div>
                                 <span class="text-lg font-bold text-cyan-600">$12.50</span>
                             </div>
-                            <button
-                                class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center">
-                                <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                Add
-                            </button>
+                            <div class="add-to-cart-form">
+                                <button
+                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
+                                    data-product-id="3">
+                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,8 +262,10 @@
                         <div class="bg-gray-200 h-48 flex items-center justify-center">
                             <i data-lucide="activity" class="w-16 h-16 text-gray-400"></i>
                         </div>
-                        <button class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50">
-                            <i data-lucide="heart" class="w-4 h-4 text-gray-400"></i>
+                        <button onclick="toggleWishlist(4)"
+                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
+                            data-product-id="4" data-in-wishlist="false" title="Add to Wishlist">
+                            <i class="fas fa-heart text-gray-400"></i>
                         </button>
                     </div>
                     <div class="p-4">
@@ -268,11 +285,14 @@
                             <div>
                                 <span class="text-lg font-bold text-cyan-600">$89.99</span>
                             </div>
-                            <button
-                                class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center">
-                                <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                Add
-                            </button>
+                            <div class="add-to-cart-form">
+                                <button
+                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
+                                    data-product-id="4">
+                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
+                                    Add to Cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

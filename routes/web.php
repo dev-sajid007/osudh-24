@@ -39,6 +39,29 @@ Route::prefix('generics')->name('generics.')->group(function () {
     Route::get('/{generic:slug}', [App\Http\Controllers\Frontend\GenericController::class, 'show'])->name('show');
 });
 
+// Wishlist Routes
+Route::prefix('wishlist')->name('wishlist.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Frontend\WishlistController::class, 'index'])->name('index');
+    Route::post('/add', [App\Http\Controllers\Frontend\WishlistController::class, 'add'])->name('add');
+    Route::post('/remove', [App\Http\Controllers\Frontend\WishlistController::class, 'remove'])->name('remove');
+    Route::post('/clear', [App\Http\Controllers\Frontend\WishlistController::class, 'clear'])->name('clear');
+    Route::get('/count', [App\Http\Controllers\Frontend\WishlistController::class, 'count'])->name('count');
+    Route::post('/check', [App\Http\Controllers\Frontend\WishlistController::class, 'check'])->name('check');
+});
+
+// Shopping Cart Routes
+Route::prefix('cart')->name('cart.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Frontend\CartController::class, 'index'])->name('index');
+    Route::post('/add', [App\Http\Controllers\Frontend\CartController::class, 'add'])->name('add');
+    Route::post('/update', [App\Http\Controllers\Frontend\CartController::class, 'update'])->name('update');
+    Route::post('/remove', [App\Http\Controllers\Frontend\CartController::class, 'remove'])->name('remove');
+    Route::post('/clear', [App\Http\Controllers\Frontend\CartController::class, 'clear'])->name('clear');
+    Route::get('/count', [App\Http\Controllers\Frontend\CartController::class, 'count'])->name('count');
+    Route::get('/summary', [App\Http\Controllers\Frontend\CartController::class, 'summary'])->name('summary');
+    Route::post('/fix-stock-issues', [App\Http\Controllers\Frontend\CartController::class, 'fixStockIssues'])->name('fix-stock-issues');
+    Route::post('/check-product', [App\Http\Controllers\Frontend\CartController::class, 'checkProduct'])->name('check-product');
+});
+
 // Protected Routes (require authentication)
 Route::middleware('auth')->group(function () {
 

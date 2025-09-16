@@ -63,16 +63,24 @@
                     <i data-lucide="user" class="w-5 h-5"></i>
                     <span class="text-sm">Account</span>
                 </div>
-                <div class="flex items-center space-x-1 cursor-pointer hover:text-cyan-600">
+                <a href="{{ route('wishlist.index') }}"
+                    class="flex items-center space-x-1 cursor-pointer hover:text-cyan-600 transition-colors duration-200">
                     <i data-lucide="heart" class="w-5 h-5"></i>
                     <span class="text-sm">Wishlist</span>
-                    <span class="bg-cyan-600 text-white text-xs rounded-full px-2 py-1">3</span>
-                </div>
-                <div class="flex items-center space-x-1 cursor-pointer hover:text-cyan-600">
+                    <span
+                        class="bg-cyan-600 text-white text-xs rounded-full px-2 py-1 wishlist-count {{ \App\Helpers\Wishlist::count() > 0 ? '' : 'hidden' }}">
+                        {{ \App\Helpers\Wishlist::count() }}
+                    </span>
+                </a>
+                <a href="{{ route('cart.index') }}"
+                    class="flex items-center space-x-1 cursor-pointer hover:text-cyan-600 transition-colors duration-200">
                     <i data-lucide="shopping-cart" class="w-5 h-5"></i>
                     <span class="text-sm">Cart</span>
-                    <span class="bg-cyan-600 text-white text-xs rounded-full px-2 py-1">2</span>
-                </div>
+                    <span
+                        class="bg-cyan-600 text-white text-xs rounded-full px-2 py-1 cart-badge cart-count {{ \App\Helpers\Cart::count() > 0 ? '' : 'hidden' }}">
+                        {{ \App\Helpers\Cart::count() }}
+                    </span>
+                </a>
             </div>
         </div>
     </div>

@@ -171,10 +171,8 @@
                                     @endif
 
                                     <!-- Wishlist Button -->
-                                    <button
-                                        class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-50">
-                                        <i data-lucide="heart" class="w-4 h-4 text-gray-400"></i>
-                                    </button>
+                                    <x-wishlist-button :product-id="$product->id"
+                                        class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200" />
                                 </div>
 
                                 <!-- Product Info -->
