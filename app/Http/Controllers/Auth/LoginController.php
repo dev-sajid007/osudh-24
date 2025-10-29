@@ -44,7 +44,7 @@ class LoginController extends Controller
                 }
             }
 
-            return redirect()->intended('/dashboard')->with('success', 'Welcome back, ' . $user->name . '!');
+            return redirect()->intended('/admin')->with('success', 'Welcome back, ' . $user->name . '!');
         }
 
         return back()->withErrors([

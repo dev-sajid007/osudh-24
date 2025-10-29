@@ -7,14 +7,14 @@
                  <div class="flex items-center mb-4">
                      @if (isset($settings['site_logo']) && $settings['site_logo'])
                          <img src="{{ $settings['site_logo'] }}"
-                             alt="{{ $settings['footer_company_name'] ?? 'PharmaCare' }}" class="h-8 w-auto mr-3">
+                             alt="{{ $settings['footer_company_name'] ?? 'Osudh24' }}" class="h-8 w-auto mr-3">
                      @else
                          <div class="bg-cyan-600 text-white p-2 rounded-lg mr-3">
                              <i data-lucide="cross" class="w-6 h-6"></i>
                          </div>
                      @endif
                      <div>
-                         <h3 class="text-xl font-bold">{{ $settings['footer_company_name'] ?? 'PharmaCare' }}</h3>
+                         <h3 class="text-xl font-bold">{{ $settings['footer_company_name'] ?? 'Osudh24' }}</h3>
                      </div>
                  </div>
                  <p class="text-gray-400 mb-4">

@@ -33,7 +33,7 @@ class Cart
             $cart[$productId] = [
                 'product_id' => $productId,
                 'quantity' => min($quantity, $product->stock_quantity),
-                'price' => $product->price,
+                'price' => $product->unit_price,
                 'added_at' => now()->toDateTimeString()
             ];
         }

@@ -17,7 +17,7 @@ class DashboardSeeder extends Seeder
         if (User::count() < 10) {
             // Create admin user
             User::firstOrCreate([
-                'email' => 'admin@pharmacy.com'
+                'email' => 'admin@gmail.com'
             ], [
                 'name' => 'Admin User',
                 'password' => Hash::make('22222222'),

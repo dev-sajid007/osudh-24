@@ -127,175 +127,99 @@
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center mb-12">
                 <h2 class="text-3xl font-bold">Featured Products</h2>
-                <a href="#" class="text-cyan-600 hover:text-cyan-700 font-semibold">View All</a>
+                <a href="{{ route('products.index') }}" class="text-cyan-600 hover:text-cyan-700 font-semibold">View All</a>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Product Card 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="relative">
-                        <div class="bg-gray-200 h-48 flex items-center justify-center">
-                            <i data-lucide="pill" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                        <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">-20%</span>
-                        <button onclick="toggleWishlist(1)"
-                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
-                            data-product-id="1" data-in-wishlist="false" title="Add to Wishlist">
-                            <i class="fas fa-heart text-gray-400"></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold mb-2">Paracetamol 500mg</h3>
-                        <p class="text-sm text-gray-600 mb-2">Pain Relief & Fever Reducer</p>
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4"></i>
-                            </div>
-                            <span class="text-sm text-gray-500 ml-2">(124)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-cyan-600">$8.99</span>
-                                <span class="text-sm text-gray-500 line-through ml-2">$11.24</span>
-                            </div>
-                            <div class="add-to-cart-form">
-                                <button
-                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
-                                    data-product-id="1">
-                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @forelse($featuredProducts as $product)
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                        <a href="{{ route('products.show', $product->slug) }}">
+                            <div class="relative">
+                                @if ($product->images && count($product->images) > 0)
+                                    <img src="{{ $product->images[0] }}" alt="{{ $product->name }}"
+                                        class="w-full h-48 object-cover">
+                                @else
+                                    <div class="bg-gray-200 h-48 flex items-center justify-center">
+                                        <i data-lucide="pill" class="w-16 h-16 text-gray-400"></i>
+                                    </div>
+                                @endif
 
-                <!-- Product Card 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="relative">
-                        <div class="bg-gray-200 h-48 flex items-center justify-center">
-                            <i data-lucide="thermometer" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                        <button onclick="toggleWishlist(2)"
-                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
-                            data-product-id="2" data-in-wishlist="false" title="Add to Wishlist">
-                            <i class="fas fa-heart text-gray-400"></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold mb-2">Digital Thermometer</h3>
-                        <p class="text-sm text-gray-600 mb-2">Fast & Accurate Reading</p>
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            </div>
-                            <span class="text-sm text-gray-500 ml-2">(89)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-cyan-600">$24.99</span>
-                            </div>
-                            <div class="add-to-cart-form">
-                                <button
-                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
-                                    data-product-id="2">
-                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                @if ($product->discount > 0)
+                                    <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">
+                                        -{{ number_format($product->discount, 0) }}%
+                                    </span>
+                                @endif
 
-                <!-- Product Card 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="relative">
-                        <div class="bg-gray-200 h-48 flex items-center justify-center">
-                            <i data-lucide="droplets" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                        <span class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">New</span>
-                        <button onclick="toggleWishlist(3)"
-                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
-                            data-product-id="3" data-in-wishlist="false" title="Add to Wishlist">
-                            <i class="fas fa-heart text-gray-400"></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold mb-2">Hand Sanitizer</h3>
-                        <p class="text-sm text-gray-600 mb-2">70% Alcohol - 500ml</p>
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4"></i>
-                            </div>
-                            <span class="text-sm text-gray-500 ml-2">(67)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-cyan-600">$12.50</span>
-                            </div>
-                            <div class="add-to-cart-form">
-                                <button
-                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
-                                    data-product-id="3">
-                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                    Add to Cart
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                @if ($product->created_at->diffInDays() <= 7)
+                                    <span
+                                        class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">New</span>
+                                @endif
 
-                <!-- Product Card 4 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <div class="relative">
-                        <div class="bg-gray-200 h-48 flex items-center justify-center">
-                            <i data-lucide="activity" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                        <button onclick="toggleWishlist(4)"
-                            class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
-                            data-product-id="4" data-in-wishlist="false" title="Add to Wishlist">
-                            <i class="fas fa-heart text-gray-400"></i>
-                        </button>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-semibold mb-2">Blood Pressure Monitor</h3>
-                        <p class="text-sm text-gray-600 mb-2">Digital Automatic Cuff</p>
-                        <div class="flex items-center mb-3">
-                            <div class="flex text-yellow-400">
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                                <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                            </div>
-                            <span class="text-sm text-gray-500 ml-2">(156)</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-lg font-bold text-cyan-600">$89.99</span>
-                            </div>
-                            <div class="add-to-cart-form">
                                 <button
-                                    class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
-                                    data-product-id="4">
-                                    <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
-                                    Add to Cart
+                                    onclick="event.preventDefault(); event.stopPropagation(); toggleWishlist({{ $product->id }})"
+                                    class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
+                                    data-product-id="{{ $product->id }}" data-in-wishlist="false"
+                                    title="Add to Wishlist">
+                                    <i class="fas fa-heart text-gray-400"></i>
                                 </button>
                             </div>
+                        </a>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">
+                                <a href="{{ route('products.show', $product->slug) }}" class="hover:text-cyan-600">
+                                    {{ $product->name }}
+                                </a>
+                            </h3>
+                            @if ($product->strength)
+                                <p class="text-sm text-gray-600 mb-2">{{ $product->strength }}</p>
+                            @else
+                                <p class="text-sm text-gray-600 mb-2">{{ Str::limit($product->description, 50) }}</p>
+                            @endif
+
+                            <div class="flex items-center mb-3">
+                                <div class="flex text-yellow-400">
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-sm text-gray-500 ml-2">({{ rand(20, 200) }})</span>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span
+                                        class="text-lg font-bold text-cyan-600">${{ number_format($product->unit_price, 2) }}</span>
+                                    @if ($product->discount > 0)
+                                        <span
+                                            class="text-sm text-gray-500 line-through ml-2">${{ number_format($product->mrp, 2) }}</span>
+                                    @endif
+                                </div>
+                                <div class="add-to-cart-form">
+                                    @if ($product->stock_quantity > 0)
+                                        <button
+                                            onclick="event.preventDefault(); event.stopPropagation(); addToCart({{ $product->id }})"
+                                            class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
+                                            data-product-id="{{ $product->id }}">
+                                            <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
+                                            Add to Cart
+                                        </button>
+                                    @else
+                                        <span class="text-red-500 text-sm font-semibold">Out of Stock</span>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-gray-400 mb-4">
+                            <i data-lucide="package" class="w-16 h-16 mx-auto"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-600 mb-2">No Featured Products Yet</h3>
+                        <p class="text-gray-500">We're working on adding some amazing products for you!</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
@@ -351,5 +275,130 @@
             </div>
         </div>
     </section>
+
+    <script>
+        // Add to cart functionality
+        function addToCart(productId) {
+            const button = event.target.closest('button');
+
+            // Disable button and show loading state
+            button.disabled = true;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 mr-1 animate-spin"></i>Adding...';
+
+            // Make AJAX request to add to cart
+            fetch('/cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        product_id: productId,
+                        quantity: 1
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Show success message
+                        showNotification(data.message, 'success');
+
+                        // Update cart count in header if it exists
+                        updateCartCount(data.cart_count);
+                    } else {
+                        // Show error message
+                        showNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('An error occurred while adding to cart. Please try again.', 'error');
+                })
+                .finally(() => {
+                    // Re-enable button and restore original text
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+
+                    // Re-initialize lucide icons for the button
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                });
+        }
+
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            // Remove any existing notifications
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification fixed top-4 right-4 z-50 px-6 py-4 rounded-lg shadow-lg max-w-sm ${
+                type === 'success' ? 'bg-green-500 text-white' : 
+                type === 'error' ? 'bg-red-500 text-white' : 
+                'bg-blue-500 text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center">
+                    <div class="flex-1">${message}</div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `;
+
+            // Add to page
+            document.body.appendChild(notification);
+
+            // Initialize lucide icons for the close button
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 5000);
+        }
+
+        // Update cart count in header
+        function updateCartCount(count) {
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            cartCountElements.forEach(element => {
+                element.textContent = count;
+                // Add a small animation
+                element.classList.add('animate-pulse');
+                setTimeout(() => {
+                    element.classList.remove('animate-pulse');
+                }, 1000);
+            });
+        }
+
+        // Wishlist functionality placeholder
+        function toggleWishlist(productId) {
+            console.log(`Toggling wishlist for product ${productId}`);
+
+            // Basic implementation
+            const button = document.querySelector(`[data-product-id="${productId}"]`);
+            const icon = button.querySelector('i');
+
+            if (icon.classList.contains('text-gray-400')) {
+                icon.classList.remove('text-gray-400');
+                icon.classList.add('text-red-500');
+                button.title = 'Remove from Wishlist';
+            } else {
+                icon.classList.remove('text-red-500');
+                icon.classList.add('text-gray-400');
+                button.title = 'Add to Wishlist';
+            }
+        }
+    </script>
 
 @endsection

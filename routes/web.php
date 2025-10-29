@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
@@ -14,6 +15,12 @@ use App\Http\Controllers\Auth\LogoutController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// Product Routes
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/{slug}', [ProductController::class, 'show'])->name('show');
+});
 
 // Authentication Routes (guest only)
 Route::middleware('guest')->group(function () {
@@ -69,6 +76,7 @@ Route::middleware('auth')->group(function () {
 
     // Admin Routes
     Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
+
         Route::get('/', [DashboardController::class, 'admin'])->name('dashboard');
 
         Route::resource('roles', RoleController::class);

@@ -84,13 +84,13 @@ class RolePermissionSeeder extends Seeder
         $userRole->permissions()->sync($userPermissions);
 
         // Assign admin role to the admin user
-        $adminUser = User::where('email', 'admin@pharmacy.com')->first();
+        $adminUser = User::where('email', 'admin@gmail.com')->first();
         if ($adminUser) {
             $adminUser->assignRole($adminRole);
         }
 
         // Assign roles to other users randomly for demo
-        $users = User::where('email', '!=', 'admin@pharmacy.com')->get();
+        $users = User::where('email', '!=', 'admin@gmail.com')->get();
         $roles = [$managerRole, $userRole];
 
         foreach ($users as $user) {
