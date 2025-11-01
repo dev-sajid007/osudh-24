@@ -6,10 +6,58 @@
  @section('content')
      <!-- Statistics Cards -->
      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-         <!-- Total Products -->
+         <!-- Total Orders -->
          <div class="bg-white rounded-lg shadow p-6">
              <div class="flex items-center">
                  <div class="p-3 rounded-full bg-blue-500 bg-opacity-75">
+                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                     </svg>
+                 </div>
+                 <div class="ml-4">
+                     <h3 class="text-lg font-semibold text-gray-900">{{ $stats['total_orders'] }}</h3>
+                     <p class="text-sm text-gray-600">Total Orders</p>
+                 </div>
+             </div>
+         </div>
+
+         <!-- Pending Orders -->
+         <div class="bg-white rounded-lg shadow p-6">
+             <div class="flex items-center">
+                 <div class="p-3 rounded-full bg-yellow-500 bg-opacity-75">
+                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                     </svg>
+                 </div>
+                 <div class="ml-4">
+                     <h3 class="text-lg font-semibold text-gray-900">{{ $stats['pending_orders'] }}</h3>
+                     <p class="text-sm text-gray-600">Pending Orders</p>
+                 </div>
+             </div>
+         </div>
+
+         <!-- Today's Revenue -->
+         <div class="bg-white rounded-lg shadow p-6">
+             <div class="flex items-center">
+                 <div class="p-3 rounded-full bg-green-500 bg-opacity-75">
+                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                             d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                     </svg>
+                 </div>
+                 <div class="ml-4">
+                     <h3 class="text-lg font-semibold text-gray-900">৳{{ number_format($stats['todays_revenue'], 2) }}</h3>
+                     <p class="text-sm text-gray-600">Today's Revenue</p>
+                 </div>
+             </div>
+         </div>
+
+         <!-- Total Products -->
+         <div class="bg-white rounded-lg shadow p-6">
+             <div class="flex items-center">
+                 <div class="p-3 rounded-full bg-purple-500 bg-opacity-75">
                      <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"></path>
@@ -21,59 +69,18 @@
                  </div>
              </div>
          </div>
-
-         <!-- Active Products -->
-         <div class="bg-white rounded-lg shadow p-6">
-             <div class="flex items-center">
-                 <div class="p-3 rounded-full bg-green-500 bg-opacity-75">
-                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                             d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                     </svg>
-                 </div>
-                 <div class="ml-4">
-                     <h3 class="text-lg font-semibold text-gray-900">{{ $stats['active_products'] }}</h3>
-                     <p class="text-sm text-gray-600">Active Products</p>
-                 </div>
-             </div>
-         </div>
-
-         <!-- Low Stock -->
-         <div class="bg-white rounded-lg shadow p-6">
-             <div class="flex items-center">
-                 <div class="p-3 rounded-full bg-yellow-500 bg-opacity-75">
-                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                             d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.268 16.5c-.77.833.192 2.5 1.732 2.5z">
-                         </path>
-                     </svg>
-                 </div>
-                 <div class="ml-4">
-                     <h3 class="text-lg font-semibold text-gray-900">{{ $stats['low_stock_products'] }}</h3>
-                     <p class="text-sm text-gray-600">Low Stock Items</p>
-                 </div>
-             </div>
-         </div>
-
-         <!-- Out of Stock -->
-         <div class="bg-white rounded-lg shadow p-6">
-             <div class="flex items-center">
-                 <div class="p-3 rounded-full bg-red-500 bg-opacity-75">
-                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                         </path>
-                     </svg>
-                 </div>
-                 <div class="ml-4">
-                     <h3 class="text-lg font-semibold text-gray-900">{{ $stats['out_of_stock_products'] }}</h3>
-                     <p class="text-sm text-gray-600">Out of Stock</p>
-                 </div>
-             </div>
-         </div>
      </div>
 
      <!-- Secondary Stats -->
      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+         <div class="bg-white rounded-lg shadow p-4 text-center">
+             <h4 class="text-2xl font-bold text-blue-600">{{ $stats['todays_orders'] }}</h4>
+             <p class="text-sm text-gray-600">Today's Orders</p>
+         </div>
+         <div class="bg-white rounded-lg shadow p-4 text-center">
+             <h4 class="text-2xl font-bold text-green-600">{{ $stats['delivered_orders'] }}</h4>
+             <p class="text-sm text-gray-600">Delivered</p>
+         </div>
          <div class="bg-white rounded-lg shadow p-4 text-center">
              <h4 class="text-2xl font-bold text-gray-900">{{ $stats['total_categories'] }}</h4>
              <p class="text-sm text-gray-600">Categories</p>
@@ -83,25 +90,59 @@
              <p class="text-sm text-gray-600">Suppliers</p>
          </div>
          <div class="bg-white rounded-lg shadow p-4 text-center">
-             <h4 class="text-2xl font-bold text-gray-900">{{ $stats['prescription_products'] }}</h4>
-             <p class="text-sm text-gray-600">Prescription</p>
+             <h4 class="text-2xl font-bold text-red-600">{{ $stats['low_stock_products'] }}</h4>
+             <p class="text-sm text-gray-600">Low Stock</p>
          </div>
          <div class="bg-white rounded-lg shadow p-4 text-center">
-             <h4 class="text-2xl font-bold text-gray-900">{{ $stats['otc_products'] }}</h4>
-             <p class="text-sm text-gray-600">OTC Products</p>
-         </div>
-         <div class="bg-white rounded-lg shadow p-4 text-center">
-             <h4 class="text-2xl font-bold text-red-600">{{ $stats['products_expiring_soon'] }}</h4>
-             <p class="text-sm text-gray-600">Expiring Soon</p>
-         </div>
-         <div class="bg-white rounded-lg shadow p-4 text-center">
-             <h4 class="text-2xl font-bold text-red-800">{{ $stats['expired_products'] }}</h4>
-             <p class="text-sm text-gray-600">Expired</p>
+             <h4 class="text-2xl font-bold text-red-800">{{ $stats['out_of_stock_products'] }}</h4>
+             <p class="text-sm text-gray-600">Out of Stock</p>
          </div>
      </div>
 
      <!-- Main Content Grid -->
-     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         <!-- Recent Orders -->
+         <div class="bg-white rounded-lg shadow">
+             <div class="px-6 py-4 border-b border-gray-200">
+                 <h3 class="text-lg font-medium text-gray-900">Recent Orders</h3>
+             </div>
+             <div class="p-6">
+                 @if (isset($recent_orders) && $recent_orders->count() > 0)
+                     <div class="space-y-4">
+                         @foreach ($recent_orders as $order)
+                             <div class="flex items-center justify-between">
+                                 <div>
+                                     <p class="text-sm font-medium text-gray-900">{{ $order->order_number }}</p>
+                                     <p class="text-xs text-gray-500">{{ $order->customer_name }}</p>
+                                     <p class="text-xs text-gray-500">{{ $order->created_at->format('M d, Y h:i A') }}</p>
+                                 </div>
+                                 <div class="text-right">
+                                     <p class="text-sm font-medium text-gray-900">৳{{ number_format($order->total_amount, 2) }}</p>
+                                     <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium
+                                         @if($order->order_status === 'pending') bg-yellow-100 text-yellow-800
+                                         @elseif($order->order_status === 'confirmed') bg-blue-100 text-blue-800
+                                         @elseif($order->order_status === 'shipped') bg-purple-100 text-purple-800
+                                         @elseif($order->order_status === 'delivered') bg-green-100 text-green-800
+                                         @elseif($order->order_status === 'cancelled') bg-red-100 text-red-800
+                                         @else bg-gray-100 text-gray-800 @endif">
+                                         {{ ucfirst($order->order_status) }}
+                                     </span>
+                                 </div>
+                             </div>
+                         @endforeach
+                     </div>
+                     <div class="mt-4">
+                         <a href="{{ route('admin.orders.index') }}"
+                             class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                             View all orders →
+                         </a>
+                     </div>
+                 @else
+                     <p class="text-gray-500 text-center py-4">No orders found</p>
+                 @endif
+             </div>
+         </div>
+
          <!-- Recent Products -->
          <div class="bg-white rounded-lg shadow">
              <div class="px-6 py-4 border-b border-gray-200">
@@ -127,7 +168,7 @@
                                  </div>
                                  <div class="text-right">
                                      <p class="text-sm font-medium text-gray-900">
-                                         ₹{{ number_format($product->unit_price, 2) }}</p>
+                                         ৳{{ number_format($product->unit_price, 2) }}</p>
                                      <p class="text-xs text-gray-500">Stock: {{ $product->stock_quantity }}</p>
                                  </div>
                              </div>

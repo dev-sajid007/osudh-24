@@ -118,13 +118,40 @@
         <div class="px-6 py-2 mt-4">
             <div class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">Orders</div>
 
-            <a href="#" class="flex items-center px-4 py-2 text-gray-400 cursor-not-allowed rounded-lg">
+            <a href="{{ route('admin.orders.index') }}" 
+               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg {{ request()->routeIs('admin.orders.*') ? 'bg-blue-50 text-blue-700' : '' }}">
                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                 </svg>
                 <span>All Orders</span>
-                <span class="ml-auto text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded">Soon</span>
+                @php
+                    $pendingOrdersCount = \App\Models\Order::where('order_status', 'pending')->count();
+                @endphp
+                @if ($pendingOrdersCount > 0)
+                    <span class="ml-auto bg-yellow-500 text-white text-xs rounded-full px-2 py-1">{{ $pendingOrdersCount }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('admin.orders.index', ['status' => 'pending']) }}" 
+               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>Pending Orders</span>
+                @if ($pendingOrdersCount > 0)
+                    <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">{{ $pendingOrdersCount }}</span>
+                @endif
+            </a>
+
+            <a href="{{ route('admin.orders.index', ['payment_status' => 'pending']) }}" 
+               class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span>Payment Pending</span>
             </a>
 
             <a href="#" class="flex items-center px-4 py-2 text-gray-400 cursor-not-allowed rounded-lg">

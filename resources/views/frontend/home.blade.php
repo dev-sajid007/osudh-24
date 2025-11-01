@@ -223,6 +223,107 @@
             </div>
         </div>
     </section>
+    <!-- Featured Products -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-12">
+                <h2 class="text-3xl font-bold">Top Products</h2>
+                <a href="{{ route('products.index') }}" class="text-cyan-600 hover:text-cyan-700 font-semibold">View All</a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                @forelse($featuredProducts as $product)
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                        <a href="{{ route('products.show', $product->slug) }}">
+                            <div class="relative">
+                                @if ($product->images && count($product->images) > 0)
+                                    <img src="{{ $product->images[0] }}" alt="{{ $product->name }}"
+                                        class="w-full h-48 object-cover">
+                                @else
+                                    <div class="bg-gray-200 h-48 flex items-center justify-center">
+                                        <i data-lucide="pill" class="w-16 h-16 text-gray-400"></i>
+                                    </div>
+                                @endif
+
+                                @if ($product->discount > 0)
+                                    <span class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">
+                                        -{{ number_format($product->discount, 0) }}%
+                                    </span>
+                                @endif
+
+                                @if ($product->created_at->diffInDays() <= 7)
+                                    <span
+                                        class="absolute top-2 left-2 bg-green-500 text-white px-2 py-1 text-xs rounded">New</span>
+                                @endif
+
+                                <button
+                                    onclick="event.preventDefault(); event.stopPropagation(); toggleWishlist({{ $product->id }})"
+                                    class="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-red-50 transition-colors duration-200 wishlist-btn"
+                                    data-product-id="{{ $product->id }}" data-in-wishlist="false"
+                                    title="Add to Wishlist">
+                                    <i class="fas fa-heart text-gray-400"></i>
+                                </button>
+                            </div>
+                        </a>
+                        <div class="p-4">
+                            <h3 class="font-semibold mb-2">
+                                <a href="{{ route('products.show', $product->slug) }}" class="hover:text-cyan-600">
+                                    {{ $product->name }}
+                                </a>
+                            </h3>
+                            @if ($product->strength)
+                                <p class="text-sm text-gray-600 mb-2">{{ $product->strength }}</p>
+                            @else
+                                <p class="text-sm text-gray-600 mb-2">{{ Str::limit($product->description, 50) }}</p>
+                            @endif
+
+                            <div class="flex items-center mb-3">
+                                <div class="flex text-yellow-400">
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                    <i data-lucide="star" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-sm text-gray-500 ml-2">({{ rand(20, 200) }})</span>
+                            </div>
+
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <span
+                                        class="text-lg font-bold text-cyan-600">${{ number_format($product->unit_price, 2) }}</span>
+                                    @if ($product->discount > 0)
+                                        <span
+                                            class="text-sm text-gray-500 line-through ml-2">${{ number_format($product->mrp, 2) }}</span>
+                                    @endif
+                                </div>
+                                <div class="add-to-cart-form">
+                                    @if ($product->stock_quantity > 0)
+                                        <button
+                                            onclick="event.preventDefault(); event.stopPropagation(); addToCart({{ $product->id }})"
+                                            class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
+                                            data-product-id="{{ $product->id }}">
+                                            <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
+                                            Add to Cart
+                                        </button>
+                                    @else
+                                        <span class="text-red-500 text-sm font-semibold">Out of Stock</span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-gray-400 mb-4">
+                            <i data-lucide="package" class="w-16 h-16 mx-auto"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-600 mb-2">No Featured Products Yet</h3>
+                        <p class="text-gray-500">We're working on adding some amazing products for you!</p>
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </section>
 
     <!-- Services Section -->
     <section class="py-16 bg-white">

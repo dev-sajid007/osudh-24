@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Panel') | Pharmacy Management</title>
 <script src="https://cdn.tailwindcss.com"></script>
+    @stack('styles')
 </head>
 
 <body class="bg-gray-100">

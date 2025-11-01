@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Supplier;
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -55,6 +56,20 @@ class DashboardController extends Controller
             'otc_products' => Product::otc()->count(),
             'products_expiring_soon' => Product::expiringSoon()->count(),
             'expired_products' => Product::expired()->count(),
+            
+            // Order Statistics
+            'total_orders' => Order::count(),
+            'pending_orders' => Order::where('order_status', 'pending')->count(),
+            'confirmed_orders' => Order::where('order_status', 'confirmed')->count(),
+            'shipped_orders' => Order::where('order_status', 'shipped')->count(),
+            'delivered_orders' => Order::where('order_status', 'delivered')->count(),
+            'cancelled_orders' => Order::where('order_status', 'cancelled')->count(),
+            'todays_orders' => Order::whereDate('created_at', today())->count(),
+            'todays_revenue' => Order::whereDate('created_at', today())
+                ->where('payment_status', 'paid')
+                ->sum('total_amount'),
+            'total_revenue' => Order::where('payment_status', 'paid')->sum('total_amount'),
+            'pending_revenue' => Order::where('payment_status', 'pending')->sum('total_amount'),
         ];
 
         // Recent products
@@ -77,6 +92,12 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        // Recent orders
+        $recent_orders = Order::with(['user', 'orderItems'])
+            ->latest()
+            ->take(5)
+            ->get();
+
         // Stock status distribution
         $stock_distribution = [
             'in_stock' => Product::where('stock_quantity', '>', 0)->whereRaw('stock_quantity > minimum_stock')->count(),
@@ -84,12 +105,23 @@ class DashboardController extends Controller
             'out_of_stock' => Product::where('stock_quantity', 0)->count(),
         ];
 
+        // Order status distribution
+        $order_distribution = [
+            'pending' => Order::where('order_status', 'pending')->count(),
+            'confirmed' => Order::where('order_status', 'confirmed')->count(),
+            'shipped' => Order::where('order_status', 'shipped')->count(),
+            'delivered' => Order::where('order_status', 'delivered')->count(),
+            'cancelled' => Order::where('order_status', 'cancelled')->count(),
+        ];
+
         return view('admin.dashboard', compact(
             'stats',
             'recent_products',
             'low_stock_products',
             'expiring_products',
-            'stock_distribution'
+            'recent_orders',
+            'stock_distribution',
+            'order_distribution'
         ));
     }
 }

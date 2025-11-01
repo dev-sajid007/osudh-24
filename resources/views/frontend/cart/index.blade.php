@@ -74,7 +74,7 @@
                                                     @endif
                                                 </div>
                                                 <p class="mt-1 text-sm font-medium text-gray-900">
-                                                    ৳{{ number_format($item->price, 2) }}</p>
+                                                    ৳{{ number_format($item->cart_price, 2) }}</p>
                                             </div>
 
                                             <div class="mt-4 sm:mt-0 sm:pr-9">
@@ -208,10 +208,10 @@
                         </dl>
 
                         <div class="mt-6">
-                            <button type="submit"
-                                class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">
+                            <a href="{{ route('checkout.index') }}"
+                                class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500 inline-flex items-center justify-center">
                                 Checkout
-                            </button>
+                            </a>
                         </div>
 
                         <div class="mt-6 flex justify-center text-center text-sm text-gray-500">

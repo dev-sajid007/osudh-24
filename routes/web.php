@@ -69,6 +69,13 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::post('/check-product', [App\Http\Controllers\Frontend\CartController::class, 'checkProduct'])->name('check-product');
 });
 
+// Checkout Routes
+Route::prefix('checkout')->name('checkout.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Frontend\CheckoutController::class, 'index'])->name('index');
+    Route::post('/', [App\Http\Controllers\Frontend\CheckoutController::class, 'store'])->name('store');
+    Route::get('/success/{orderNumber}', [App\Http\Controllers\Frontend\CheckoutController::class, 'success'])->name('success');
+});
+
 // Protected Routes (require authentication)
 Route::middleware('auth')->group(function () {
 
@@ -82,6 +89,13 @@ Route::middleware('auth')->group(function () {
         Route::resource('roles', RoleController::class);
 
         Route::resource('users', UserController::class);
+
+        // Order Management
+        Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->only(['index', 'show']);
+        Route::patch('orders/{order}/status', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
+        Route::patch('orders/{order}/payment-status', [App\Http\Controllers\Admin\OrderController::class, 'updatePaymentStatus'])->name('orders.update-payment-status');
+        Route::post('orders/bulk-update', [App\Http\Controllers\Admin\OrderController::class, 'bulkUpdate'])->name('orders.bulk-update');
+        Route::get('orders/export', [App\Http\Controllers\Admin\OrderController::class, 'export'])->name('orders.export');
 
         // Product Management
         Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
