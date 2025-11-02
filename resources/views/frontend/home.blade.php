@@ -1,43 +1,43 @@
 @extends('layouts.frontend.app')
 @section('content')
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-cyan-600 to-cyan-800 text-white py-16">
+    <section class="bg-gradient-to-r from-cyan-600 to-cyan-800 text-white py-8 md:py-16">
         <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between">
-                <div class="w-1/2">
-                    <h2 class="text-5xl font-bold mb-4">Your Health is Our Priority</h2>
-                    <p class="text-xl mb-6">Get medicines delivered to your doorstep. Safe, fast, and reliable.</p>
-                    <div class="flex space-x-4">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Your Health is Our Priority</h2>
+                    <p class="text-lg md:text-xl mb-6">Get medicines delivered to your doorstep. Safe, fast, and reliable.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
                         <button
-                            class="bg-white text-cyan-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 flex items-center">
+                            class="bg-white text-cyan-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 flex items-center justify-center">
                             <i data-lucide="upload" class="w-5 h-5 mr-2"></i>
                             Upload Prescription
                         </button>
                         <button
-                            class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-cyan-600 flex items-center">
+                            class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-cyan-600 flex items-center justify-center">
                             <i data-lucide="phone" class="w-5 h-5 mr-2"></i>
                             Consult Doctor
                         </button>
                     </div>
                 </div>
-                <div class="w-1/2 flex justify-end">
-                    <div class="bg-white/10 p-8 rounded-2xl backdrop-blur-sm">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white/20 p-4 rounded-lg text-center">
-                                <i data-lucide="truck" class="w-8 h-8 mx-auto mb-2"></i>
-                                <p class="text-sm">Free Delivery</p>
+                <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <div class="bg-white/10 p-4 md:p-8 rounded-2xl backdrop-blur-sm w-full max-w-md">
+                        <div class="grid grid-cols-2 gap-3 md:gap-4">
+                            <div class="bg-white/20 p-3 md:p-4 rounded-lg text-center">
+                                <i data-lucide="truck" class="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2"></i>
+                                <p class="text-xs md:text-sm">Free Delivery</p>
                             </div>
-                            <div class="bg-white/20 p-4 rounded-lg text-center">
-                                <i data-lucide="shield-check" class="w-8 h-8 mx-auto mb-2"></i>
-                                <p class="text-sm">Genuine Products</p>
+                            <div class="bg-white/20 p-3 md:p-4 rounded-lg text-center">
+                                <i data-lucide="shield-check" class="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2"></i>
+                                <p class="text-xs md:text-sm">Genuine Products</p>
                             </div>
-                            <div class="bg-white/20 p-4 rounded-lg text-center">
-                                <i data-lucide="clock" class="w-8 h-8 mx-auto mb-2"></i>
-                                <p class="text-sm">24/7 Support</p>
+                            <div class="bg-white/20 p-3 md:p-4 rounded-lg text-center">
+                                <i data-lucide="clock" class="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2"></i>
+                                <p class="text-xs md:text-sm">24/7 Support</p>
                             </div>
-                            <div class="bg-white/20 p-4 rounded-lg text-center">
-                                <i data-lucide="award" class="w-8 h-8 mx-auto mb-2"></i>
-                                <p class="text-sm">Licensed</p>
+                            <div class="bg-white/20 p-3 md:p-4 rounded-lg text-center">
+                                <i data-lucide="award" class="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2"></i>
+                                <p class="text-xs md:text-sm">Licensed</p>
                             </div>
                         </div>
                     </div>
