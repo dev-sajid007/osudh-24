@@ -196,7 +196,7 @@
                                                 @endif
                                             </div>
                                             @if ($product->stock_quantity > 0)
-                                                <button onclick="addToCart({{ $product->id }})"
+                                                <button onclick="addToCart(event, {{ $product->id }})"
                                                     class="bg-cyan-600 text-white px-3 py-2 rounded-lg hover:bg-cyan-700 text-sm transition-colors">
                                                     Add to Cart
                                                 </button>
@@ -235,8 +235,13 @@
 
     <script>
         // Add to cart functionality
-        function addToCart(productId) {
-            const button = event.target.closest('button');
+        function addToCart(e, productId) {
+            e = e || window.event;
+            const button = e?.target?.closest('button') || document.querySelector(`button[data-product-id="${productId}"]`);
+            if (!button) {
+                console.error('Add to cart button not found for product', productId);
+                return;
+            }
 
             // Disable button and show loading state
             button.disabled = true;
@@ -330,6 +335,12 @@
             const cartCountElements = document.querySelectorAll('.cart-count');
             cartCountElements.forEach(element => {
                 element.textContent = count;
+                // Show or hide the badge based on count
+                if (count > 0) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
                 // Add a small animation
                 element.classList.add('animate-pulse');
                 setTimeout(() => {

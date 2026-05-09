@@ -39,9 +39,15 @@
                             @foreach ($cartItems as $item)
                                 <li class="flex py-6 sm:py-10" data-product-id="{{ $item->id }}">
                                     <div class="flex-shrink-0">
-                                        <img src="{{ $item->featured_image_url ?? asset('images/placeholder-product.jpg') }}"
-                                            alt="{{ $item->name }}"
-                                            class="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48">
+                                        @if ($item->images && count($item->images) > 0)
+                                            <img src="{{ asset('storage/' . $item->images[0]) }}"
+                                                alt="{{ $item->name }}"
+                                                class="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48">
+                                        @else
+                                            <div class="w-24 h-24 rounded-md bg-gray-200 flex items-center justify-center sm:w-48 sm:h-48">
+                                                <i data-lucide="pill" class="w-8 h-8 text-gray-400"></i>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="ml-4 flex-1 flex flex-col justify-between sm:ml-6">

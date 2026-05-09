@@ -198,7 +198,7 @@
                                 <div class="add-to-cart-form">
                                     @if ($product->stock_quantity > 0)
                                         <button
-                                            onclick="event.preventDefault(); event.stopPropagation(); addToCart({{ $product->id }})"
+                                            onclick="event.preventDefault(); event.stopPropagation(); addToCart(event, {{ $product->id }})"
                                             class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
                                             data-product-id="{{ $product->id }}">
                                             <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
@@ -299,7 +299,7 @@
                                 <div class="add-to-cart-form">
                                     @if ($product->stock_quantity > 0)
                                         <button
-                                            onclick="event.preventDefault(); event.stopPropagation(); addToCart({{ $product->id }})"
+                                            onclick="event.preventDefault(); event.stopPropagation(); addToCart(event, {{ $product->id }})"
                                             class="add-to-cart-btn bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-700 flex items-center"
                                             data-product-id="{{ $product->id }}">
                                             <i data-lucide="shopping-cart" class="w-4 h-4 mr-1"></i>
@@ -379,8 +379,13 @@
 
     <script>
         // Add to cart functionality
-        function addToCart(productId) {
-            const button = event.target.closest('button');
+        function addToCart(e, productId) {
+            e = e || window.event;
+            const button = e?.target?.closest('button') || document.querySelector(`button[data-product-id="${productId}"]`);
+            if (!button) {
+                console.error('Add to cart button not found for product', productId);
+                return;
+            }
 
             // Disable button and show loading state
             button.disabled = true;
@@ -474,6 +479,12 @@
             const cartCountElements = document.querySelectorAll('.cart-count');
             cartCountElements.forEach(element => {
                 element.textContent = count;
+                // Show or hide the badge based on count
+                if (count > 0) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
                 // Add a small animation
                 element.classList.add('animate-pulse');
                 setTimeout(() => {

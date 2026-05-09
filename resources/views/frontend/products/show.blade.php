@@ -163,7 +163,7 @@
                                             <i data-lucide="plus" class="w-4 h-4"></i>
                                         </button>
                                     </div>
-                                    <button onclick="addToCart({{ $product->id }})"
+                                    <button onclick="addToCart(event, {{ $product->id }})"
                                         class="flex-1 bg-cyan-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-cyan-700 transition-colors flex items-center justify-center">
                                         <i data-lucide="shopping-cart" class="w-5 h-5 mr-2"></i>
                                         Add to Cart
@@ -308,7 +308,7 @@
                                         @endif
                                     </div>
                                     @if ($relatedProduct->stock_quantity > 0)
-                                        <button onclick="addToCart({{ $relatedProduct->id }})"
+                                        <button onclick="addToCart(event, {{ $relatedProduct->id }})"
                                             class="bg-cyan-600 text-white px-3 py-2 rounded-lg hover:bg-cyan-700 text-sm">
                                             Add to Cart
                                         </button>
@@ -382,13 +382,19 @@
         }
 
         // Add to cart functionality
-        function addToCart(productId) {
+        function addToCart(e, productId) {
             console.log('addToCart called with productId:', productId);
 
+            e = e || window.event;
             const quantity = document.getElementById('quantity') ? document.getElementById('quantity').value : 1;
-            const button = event.target.closest('button');
+            const button = e?.target?.closest('button') || document.querySelector(`button[data-product-id="${productId}"]`);
 
             console.log('Quantity:', quantity, 'Button:', button);
+
+            if (!button) {
+                console.error('Add to cart button not found for product', productId);
+                return;
+            }
 
             // Disable button and show loading state
             button.disabled = true;
@@ -493,6 +499,12 @@
             const cartCountElements = document.querySelectorAll('.cart-count');
             cartCountElements.forEach(element => {
                 element.textContent = count;
+                // Show or hide the badge based on count
+                if (count > 0) {
+                    element.classList.remove('hidden');
+                } else {
+                    element.classList.add('hidden');
+                }
                 // Add a small animation
                 element.classList.add('animate-pulse');
                 setTimeout(() => {
