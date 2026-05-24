@@ -10,63 +10,83 @@ use Illuminate\Support\Facades\Cache;
 class WebsiteSettingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display listing
      */
     public function index(Request $request)
     {
         $group = $request->get('group', 'all');
 
-        $query = WebsiteSetting::ordered();
+        // Query Start
+        $query = WebsiteSetting::query()->orderBy('sort_order')->orderBy('id');
 
+        // Filter by group
         if ($group !== 'all') {
-            $query->byGroup($group);
+            $query->where('group', $group);
         }
 
+        // Pagination
         $settings = $query->paginate(20);
 
+        // All groups
         $groups = WebsiteSetting::select('group')
             ->distinct()
             ->orderBy('group')
             ->pluck('group');
 
-        return view('admin.website-settings.index', compact('settings', 'groups', 'group'));
+        return view('admin.website-settings.index', compact(
+            'settings',
+            'groups',
+            'group'
+        ));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create form
      */
     public function create()
     {
         $groups = ['general', 'header', 'footer', 'contact', 'social'];
-        $types = ['text', 'textarea', 'email', 'phone', 'url', 'number', 'image'];
+
+        $types = [
+            'text',
+            'textarea',
+            'email',
+            'phone',
+            'url',
+            'number',
+            'image'
+        ];
 
         return view('admin.website-settings.create', compact('groups', 'types'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store data
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'key' => 'required|string|unique:website_settings,key|max:255',
+        $validated = $request->validate([
+            'key' => 'required|string|max:255|unique:website_settings,key',
             'label' => 'required|string|max:255',
             'type' => 'required|in:text,textarea,email,phone,url,number,image',
             'group' => 'required|string|max:255',
             'value' => 'nullable|string',
             'description' => 'nullable|string',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable|boolean',
         ]);
 
-        WebsiteSetting::create($request->all());
+        WebsiteSetting::create($validated);
 
-        return redirect()->route('admin.website-settings.index')
+        Cache::flush();
+
+        return redirect()
+            ->route('admin.website-settings.index')
             ->with('success', 'Website setting created successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Show single item
      */
     public function show(WebsiteSetting $websiteSetting)
     {
@@ -74,22 +94,35 @@ class WebsiteSettingController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edit form
      */
     public function edit(WebsiteSetting $websiteSetting)
     {
         $groups = ['general', 'header', 'footer', 'contact', 'social'];
-        $types = ['text', 'textarea', 'email', 'phone', 'url', 'number', 'image'];
 
-        return view('admin.website-settings.edit', compact('websiteSetting', 'groups', 'types'));
+        $types = [
+            'text',
+            'textarea',
+            'email',
+            'phone',
+            'url',
+            'number',
+            'image'
+        ];
+
+        return view('admin.website-settings.edit', compact(
+            'websiteSetting',
+            'groups',
+            'types'
+        ));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update data
      */
     public function update(Request $request, WebsiteSetting $websiteSetting)
     {
-        $request->validate([
+        $validated = $request->validate([
             'key' => 'required|string|max:255|unique:website_settings,key,' . $websiteSetting->id,
             'label' => 'required|string|max:255',
             'type' => 'required|in:text,textarea,email,phone,url,number,image',
@@ -97,43 +130,54 @@ class WebsiteSettingController extends Controller
             'value' => 'nullable|string',
             'description' => 'nullable|string',
             'sort_order' => 'nullable|integer|min:0',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable|boolean',
         ]);
 
-        $websiteSetting->update($request->all());
+        $websiteSetting->update($validated);
 
-        return redirect()->route('admin.website-settings.index')
+        Cache::flush();
+
+        return redirect()
+            ->route('admin.website-settings.index')
             ->with('success', 'Website setting updated successfully.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete item
      */
     public function destroy(WebsiteSetting $websiteSetting)
     {
         $websiteSetting->delete();
 
-        return redirect()->route('admin.website-settings.index')
+        Cache::flush();
+
+        return redirect()
+            ->route('admin.website-settings.index')
             ->with('success', 'Website setting deleted successfully.');
     }
 
     /**
-     * Bulk update settings (for quick editing)
+     * Bulk update
      */
     public function bulkUpdate(Request $request)
     {
         $settings = $request->get('settings', []);
 
         foreach ($settings as $id => $value) {
+
             $setting = WebsiteSetting::find($id);
+
             if ($setting) {
-                $setting->update(['value' => $value]);
+                $setting->update([
+                    'value' => $value
+                ]);
             }
         }
 
-        // Clear all cache
         Cache::flush();
 
-        return redirect()->back()->with('success', 'Settings updated successfully.');
+        return redirect()
+            ->back()
+            ->with('success', 'Settings updated successfully.');
     }
 }

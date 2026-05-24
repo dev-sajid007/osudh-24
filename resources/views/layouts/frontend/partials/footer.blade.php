@@ -37,9 +37,9 @@
                  <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
                  <ul class="space-y-2 text-gray-400">
                      <li><a href="#" class="hover:text-white">About Us</a></li>
-                     <li><a href="#" class="hover:text-white">Our Services</a></li>
+                     <li><a href="{{ route('health-services.index') }}" class="hover:text-white">Our Services</a></li>
                      <li><a href="#" class="hover:text-white">Health Blog</a></li>
-                     <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                     <li><a href="{{ route('contact.index') }}" class="hover:text-white">Contact Us</a></li>
                      <li><a href="#" class="hover:text-white">Store Locator</a></li>
                  </ul>
              </div>

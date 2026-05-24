@@ -42,7 +42,8 @@ class Product extends Model
         'side_effects',
         'usage_instructions',
         'tags',
-        'cloudinary_public_ids'
+        'cloudinary_public_ids',
+        'is_active' // ✅ IMPORTANT (added for safety)
     ];
 
     protected $casts = [
@@ -55,6 +56,7 @@ class Product extends Model
         'discount' => 'decimal:2',
         'tax_rate' => 'decimal:2',
         'expiry_date' => 'date',
+        'is_active' => 'boolean'
     ];
 
     protected static function boot()
@@ -65,13 +67,21 @@ class Product extends Model
             if (empty($product->slug)) {
                 $product->slug = Str::slug($product->name);
             }
+
             if (empty($product->sku)) {
                 $product->sku = 'SKU-' . strtoupper(Str::random(8));
+            }
+
+            if (!isset($product->is_active)) {
+                $product->is_active = 1;
             }
         });
     }
 
-    // Relationships
+    // ========================
+    // RELATIONS
+    // ========================
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -87,7 +97,10 @@ class Product extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    // Accessors
+    // ========================
+    // ACCESSORS
+    // ========================
+
     public function getFinalPriceAttribute()
     {
         return $this->unit_price - ($this->unit_price * $this->discount / 100);
@@ -118,10 +131,13 @@ class Product extends Model
         return 'in_stock';
     }
 
-    // Scopes
+    // ========================
+    // SCOPES (FIXED SECTION)
+    // ========================
+
     public function scopeActive(Builder $query): Builder
     {
-        return $query->where('status', 'active');
+        return $query->where('is_active', 1);
     }
 
     public function scopeInStock(Builder $query): Builder
@@ -159,10 +175,10 @@ class Product extends Model
     {
         return $query->where(function ($q) use ($term) {
             $q->where('name', 'like', "%{$term}%")
-                ->orWhere('generic_name', 'like', "%{$term}%")
-                ->orWhere('brand', 'like', "%{$term}%")
-                ->orWhere('sku', 'like', "%{$term}%")
-                ->orWhere('barcode', 'like', "%{$term}%");
+              ->orWhere('generic_name', 'like', "%{$term}%")
+              ->orWhere('brand', 'like', "%{$term}%")
+              ->orWhere('sku', 'like', "%{$term}%")
+              ->orWhere('barcode', 'like', "%{$term}%");
         });
     }
 
@@ -176,53 +192,34 @@ class Product extends Model
         return $query->where('generic_id', $genericId);
     }
 
-    public function scopeGroupByGeneric(Builder $query): Builder
-    {
-        return $query->select('generic_id', DB::raw('COUNT(*) as product_count'))
-            ->with('generic')
-            ->whereNotNull('generic_id')
-            ->groupBy('generic_id');
-    }
-
-    public function scopeWithGeneric(Builder $query): Builder
-    {
-        return $query->with('generic');
-    }
-
-    public function scopeByGenericSlug(Builder $query, string $slug): Builder
-    {
-        return $query->whereHas('generic', function ($q) use ($slug) {
-            $q->where('slug', $slug);
-        });
-    }
-
     public function scopePriceRange(Builder $query, $min = null, $max = null): Builder
     {
         if ($min !== null) {
             $query->where('unit_price', '>=', $min);
         }
+
         if ($max !== null) {
             $query->where('unit_price', '<=', $max);
         }
+
         return $query;
     }
 
-    /**
-     * Get image URLs from Cloudinary or local storage
-     */
+    // ========================
+    // IMAGE HANDLING
+    // ========================
+
     public function getImageUrlsAttribute()
     {
         $imageUrls = [];
 
-        // If we have Cloudinary public IDs, use them
         if ($this->cloudinary_public_ids && is_array($this->cloudinary_public_ids)) {
             $cloudinaryService = app(CloudinaryService::class);
+
             foreach ($this->cloudinary_public_ids as $publicId) {
                 $imageUrls[] = $cloudinaryService->getProductImageUrls($publicId);
             }
-        }
-        // Fallback to local images
-        elseif ($this->images && is_array($this->images)) {
+        } elseif ($this->images && is_array($this->images)) {
             foreach ($this->images as $image) {
                 $imageUrls[] = [
                     'original' => asset('storage/' . $image),
@@ -236,39 +233,13 @@ class Product extends Model
         return $imageUrls;
     }
 
-    /**
-     * Get primary image URL
-     */
     public function getPrimaryImageUrlAttribute()
     {
-        $imageUrls = $this->image_urls;
-
-        if (!empty($imageUrls)) {
-            return $imageUrls[0]['medium'];
-        }
-
-        return null;
+        return $this->image_urls[0]['medium'] ?? null;
     }
 
-    /**
-     * Get thumbnail image URL
-     */
     public function getThumbnailImageUrlAttribute()
     {
-        $imageUrls = $this->image_urls;
-
-        if (!empty($imageUrls)) {
-            return $imageUrls[0]['thumbnail'];
-        }
-
-        return null;
-    }
-
-    /**
-     * Check if product has Cloudinary images
-     */
-    public function hasCloudinaryImagesAttribute()
-    {
-        return !empty($this->cloudinary_public_ids);
+        return $this->image_urls[0]['thumbnail'] ?? null;
     }
 }

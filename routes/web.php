@@ -10,6 +10,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Frontend\GenericController;
+use App\Http\Controllers\Frontend\PrescriptionController;
+use App\Http\Controllers\Frontend\HealthServiceController;
+use App\Http\Controllers\Frontend\ContactController;
 
 
 
@@ -149,4 +153,38 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin,manager')->group(function () {
         Route::resource('users', UserController::class);
     });
+
+
+    Route::prefix('generics')->name('generics.')->group(function () {
+    Route::get('/', [GenericController::class, 'index'])->name('index');
+    Route::get('/create', [GenericController::class, 'create'])->name('create');
+    Route::post('/', [GenericController::class, 'store'])->name('store');
+    Route::get('/{generic}', [GenericController::class, 'show'])->name('show');
+    Route::get('/{generic}/edit', [GenericController::class, 'edit'])->name('edit');
+    Route::put('/{generic}', [GenericController::class, 'update'])->name('update');
+    Route::delete('/{generic}', [GenericController::class, 'destroy'])->name('destroy');
+});
+
+
+
+// Health Services Routes
+Route::get('/health-services', [HealthServiceController::class, 'index'])
+    ->name('health-services.index');
+
+// Contact Routes
+Route::get('/contact', [ContactController::class, 'index'])
+    ->name('contact.index');
+
+// ==========================
+// Prescription Upload Routes
+// ==========================
+
+Route::get('/prescription-upload', [PrescriptionController::class, 'index'])
+    ->name('prescription.index');
+
+Route::post('/prescription-upload', [PrescriptionController::class, 'store'])
+    ->name('prescription.store');
+
+
+
 });

@@ -260,9 +260,9 @@
                     <a href="{{ route('home') }}" class="py-4 hover:text-cyan-400">Home</a>
                     <a href="{{ route('categories.index') }}" class="py-4 hover:text-cyan-400">Categories</a>
                     <a href="{{ route('generics.index') }}" class="py-4 hover:text-cyan-400">Generics</a>
-                    <a href="#" class="py-4 hover:text-cyan-400">Prescription Upload</a>
-                    <a href="#" class="py-4 hover:text-cyan-400">Health Services</a>
-                    <a href="#" class="py-4 hover:text-cyan-400">Contact</a>
+                    <a href="{{ route('prescription.index') }}" class="py-4 hover:text-cyan-400">Prescription Upload</a>
+                    <a href="{{ route('health-services.index') }}" class="py-4 hover:text-cyan-400">Health Services</a>
+                    <a href="{{ route('contact.index') }}" class="py-4 hover:text-cyan-400">Contact</a>
                 </div>
 
                 <!-- Emergency Button -->
@@ -302,9 +302,9 @@
                     <a href="{{ route('home') }}" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Home</a>
                     <a href="{{ route('categories.index') }}" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Categories</a>
                     <a href="{{ route('generics.index') }}" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Generics</a>
-                    <a href="#" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Prescription Upload</a>
-                    <a href="#" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Health Services</a>
-                    <a href="#" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Contact</a>
+                    <a href="{{ route('prescription.index') }}" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Prescription Upload</a>
+                    <a href="{{ route('health-services.index') }}" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Health Services</a>
+                    <a href="{{ route('contact.index') }}" class="block py-3 border-b border-gray-700 hover:text-cyan-400">Contact</a>
                     
                     <!-- Mobile Categories Accordion -->
                     <div class="pt-4">
