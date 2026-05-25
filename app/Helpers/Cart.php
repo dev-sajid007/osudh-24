@@ -176,21 +176,13 @@ class Cart
     }
 
     /**
-     * Get cart total with tax (assuming 10% tax)
+     * Get cart total
      */
-    public static function getTotal(float $taxRate = 0.10): float
+    public static function getTotal(): float
     {
         $subtotal = self::getSubtotal();
-        $tax = $subtotal * $taxRate;
-        return round($subtotal + $tax, 2);
-    }
-
-    /**
-     * Get tax amount
-     */
-    public static function getTax(float $taxRate = 0.10): float
-    {
-        return round(self::getSubtotal() * $taxRate, 2);
+        $shipping = self::getShipping();
+        return round($subtotal + $shipping, 2);
     }
 
     /**
@@ -222,15 +214,13 @@ class Cart
     public static function getSummary(): array
     {
         $subtotal = self::getSubtotal();
-        $tax = self::getTax();
         $shipping = self::getShipping();
-        $total = $subtotal + $tax + $shipping;
+        $total = $subtotal + $shipping;
 
         return [
             'item_count' => self::count(),
             'unique_items' => self::getUniqueItemCount(),
             'subtotal' => $subtotal,
-            'tax' => $tax,
             'shipping' => $shipping,
             'total' => round($total, 2)
         ];

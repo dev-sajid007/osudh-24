@@ -125,8 +125,10 @@ class CartController extends Controller
                     'message' => 'Cart updated successfully!',
                     'cart_count' => $summary['item_count'],
                     'cart_subtotal' => $summary['subtotal'],
+                    'cart_shipping' => $summary['shipping'],
                     'cart_total' => $summary['total'],
-                    'product_total' => $productTotal
+                    'product_total' => $productTotal,
+                    'summary' => $summary
                 ]);
             } else {
                 return response()->json([
@@ -160,7 +162,9 @@ class CartController extends Controller
                     'message' => 'Product removed from cart!',
                     'cart_count' => $summary['item_count'],
                     'cart_subtotal' => $summary['subtotal'],
-                    'cart_total' => $summary['total']
+                    'cart_shipping' => $summary['shipping'],
+                    'cart_total' => $summary['total'],
+                    'summary' => $summary
                 ]);
             } else {
                 return response()->json([

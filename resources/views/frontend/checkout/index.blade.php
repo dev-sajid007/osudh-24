@@ -396,12 +396,7 @@
                                             ৳{{ number_format($summary['shipping'], 2) }}
                                         </dd>
                                     </div>
-                                    <div class="flex items-center justify-between">
-                                        <dt class="text-sm text-gray-600">Tax</dt>
-                                        <dd class="text-sm font-medium text-gray-900">
-                                            ৳{{ number_format($summary['tax'], 2) }}
-                                        </dd>
-                                    </div>
+
                                     <div class="border-t border-gray-200 pt-4 flex items-center justify-between">
                                         <dt class="text-base font-medium text-gray-900">Total</dt>
                                         <dd class="text-base font-medium text-gray-900">

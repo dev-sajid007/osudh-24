@@ -121,7 +121,7 @@ class CheckoutController extends Controller
                 'shipping_postal_code' => $request->postal_code,
                 'subtotal' => $summary['subtotal'],
                 'shipping_cost' => $summary['shipping'],
-                'tax_amount' => $summary['tax'],
+                'tax_amount' => 0,
                 'total_amount' => $summary['total'],
                 'payment_method' => $request->payment_method,
                 'payment_status' => 'pending',

@@ -191,21 +191,7 @@
                                 <dd class="text-sm font-medium text-gray-900">৳<span
                                         id="shipping">{{ number_format($summary['shipping'], 2) }}</span></dd>
                             </div>
-                            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-                                <dt class="flex text-sm text-gray-600">
-                                    <span>Tax estimate</span>
-                                    <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
-                                        <span class="sr-only">Learn more about how tax is calculated</span>
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </a>
-                                </dt>
-                                <dd class="text-sm font-medium text-gray-900">৳<span
-                                        id="tax">{{ number_format($summary['tax'], 2) }}</span></dd>
-                            </div>
+
                             <div class="flex items-center justify-between border-t border-gray-200 pt-4">
                                 <dt class="text-base font-medium text-gray-900">Order total</dt>
                                 <dd class="text-base font-medium text-gray-900">৳<span

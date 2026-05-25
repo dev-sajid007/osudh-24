@@ -337,12 +337,10 @@ class Cart {
         if (summary) {
             const subtotalEl = document.getElementById('subtotal');
             const shippingEl = document.getElementById('shipping');
-            const taxEl = document.getElementById('tax');
             const totalEl = document.getElementById('total');
 
             if (subtotalEl) subtotalEl.textContent = parseFloat(summary.subtotal).toFixed(2);
             if (shippingEl) shippingEl.textContent = parseFloat(summary.shipping).toFixed(2);
-            if (taxEl) taxEl.textContent = parseFloat(summary.tax).toFixed(2);
             if (totalEl) totalEl.textContent = parseFloat(summary.total).toFixed(2);
         }
     }
